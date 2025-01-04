@@ -21,6 +21,7 @@ fn main() {
             tx1.send(val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
+        println!("sender1 closed");
     });
 
     thread::spawn(move || {
@@ -35,9 +36,12 @@ fn main() {
             tx.send(val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
+        println!("sender2 closed");
     });
 
     for received in rx {
         println!("Got: {received}");
     }
+
+    println!("this happens after all the messages are received");
 }
